@@ -1,11 +1,24 @@
-<h2>Name of the list:</h2>
 <h2><%= @list.name %></h2>
 
 <p><strong>bookmarks</strong></p>
 <ul class="list-group">
-  <% @list.bookmarks.each do |bookmark| %>
-    <li class="list-group-item"><%= bookmark.comment %></li>
-    <%# <link_to > add a link here %>
+  <% @list.movies.each do |movie| %>
+<%  bookmark = Bookmark.find_by(list: @list, movie: movie ) %>
+    <li class="list-group-item"><%= movie.title %> - <%= movie.overview %>
+    <br>
+    <%= image_tag movie.poster_url %>
+    <br>
+    Rating:<%= movie.rating %> - <%= bookmark.comment %>
+    <br>
+    <%= link_to "Delete this bookmark",
+        bookmark_path(bookmark),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
+    </li>
   <% end %>
 </ul>
 <br>
+
+<%= link_to 'Add a new bookmark!', new_list_bookmark_path(@list) %>
+<br>
+<%= link_to 'Back', lists_path %>
