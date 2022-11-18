@@ -4,7 +4,8 @@
 <p><strong>bookmarks</strong></p>
 <ul class="list-group">
   <% @list.bookmarks.each do |bookmark| %>
-    <li class="list-group-item"><%= bookmark.content %></li>
+    <li class="list-group-item"><%= bookmark.comment %></li>
+    <%# <link_to > add a link here %>
   <% end %>
 </ul>
 <br>
